@@ -1,13 +1,14 @@
 
-## Proposito: Função R capaz de armazenar em cache cálculos potencialmente demorados
 
+## Purpose: Function able to cache potentially time-consuming calculations
+## Proposito: Função R capaz de armazenar em cache cálculos potencialmente demorados
 
 ##makeCacheMatrix: 
 #This function creates a special "matrix" object that can cache its inverse.
 #Esta função cria um objeto "matrix" especial que pode armazenar em cache seu inverso.
 
 makeCacheMatrix <- function(x = matrix()) {
-    mI <- NULL #inicializa a matriz inversa /initialize the inverse matrix
+    mI <- NULL #inicializa a matriz inversa/initialize the inverse matrix
     
     #define o valor da matriz / set the value of the matrix
     set <- function(y) {
@@ -33,23 +34,23 @@ makeCacheMatrix <- function(x = matrix()) {
 #Se o inverso já foi calculado (e a matriz não mudou), então o cachesolve deve recuperar o inverso pelo cache.
 
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
-  mI <- x$getmatrixI()
-  
-  #Verifica se a inversa já foi calculada e retorna / Check if the inverse has already been calculated and returns 
-  if(!is.null(mI)) {
-    message("Getting cached data")
-    return(mI)
-  }
-  #Get the matrix from our object
-  data <- x$get()
-  print(class(data)) #print da classe de data / class of data
-  
-  #calcula o inverso usando a função solve/ calculate the inverse using the solve function
-  m <- solve(data)
-  
-  #Set the inverse to the object/ Define a inversa para o objeto
-  x$setmatrixI(m) 
-  #retorna a matrix
+    ## Return a matrix that is the inverse of 'x'
+    mI <- x$getmatrixI()
+    
+    #Verifica se a inversa já foi calculada e a retorna / Check if the inverse has already been calculated and returns 
+    if(!is.null(mI)) {
+      message("Getting cached data")
+      return(mI)
+    }
+    #Get the matrix and put it in the "data" variable
+    data <- x$get()
+    print(class(data)) #print da classe de data / class of data
+    
+    #calcula o inverso usando a função solve/ calculate the inverse using the solve function
+    m <- solve(data)
+    
+    #Set the inverse to the object/ Define a inversa para o objeto
+    x$setmatrixI(m) 
+    #retorna a matrix
   m
 }
